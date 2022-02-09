@@ -5,10 +5,11 @@ namespace ConsoleAppParametersHandler
     public class ParameterDefinition
     {
         public char Code { get; }
+
         public string Description { get; }
-        public bool Required { get; }
-        public bool ValueExpected { get; }
+
         public bool Found { get; set; }
+
         private string _value;
         public string Value
         {
@@ -20,7 +21,16 @@ namespace ConsoleAppParametersHandler
             }
         }
 
-        public ParameterDefinition(char code, string description, bool required = false, bool valueExpected = false)
+        private Func<bool> _conditionalRequirement;
+        public bool ConditionalRequirement => _conditionalRequirement != null ? _conditionalRequirement() : false;
+
+        private bool _required;
+        public bool Required => _required || ConditionalRequirement;
+
+        private bool _valueExpected;
+        public bool ValueExpected => _valueExpected || Required;
+
+        public ParameterDefinition(char code, string description, bool required = false, bool valueExpected = false, Func<bool> conditionalRquirement = null)
         {
             if (char.IsWhiteSpace(code))
             {
@@ -32,10 +42,11 @@ namespace ConsoleAppParametersHandler
                 throw new ArgumentException($"Parameter without value expectation cannot be required. Code [{code}].");
             }
 
+            _required = required;
+            _conditionalRequirement = conditionalRquirement;
+            _valueExpected = valueExpected;
             Code = char.ToLower(code);
             Description = description;
-            Required = required;
-            ValueExpected = required || valueExpected;
         }
 
         private void Validate(string value)

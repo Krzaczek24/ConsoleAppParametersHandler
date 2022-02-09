@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Krzaczek24?tab=packages</PackageProjectUrl>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/Krzaczek24/ConsoleAppParametersHandler</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>ConsoleAppParametersHandler</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Tomasz 'Krzaczek' Drewek</Authors>
   </PropertyGroup>
 

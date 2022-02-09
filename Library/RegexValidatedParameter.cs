@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace ConsoleAppParametersHandler
 {
@@ -6,8 +7,8 @@ namespace ConsoleAppParametersHandler
     {
         protected abstract Regex RegexPattern { get; }
 
-        public RegexValidatedParameter(char code, string description, bool required = false)
-            : base(code, description, required, true) { }
+        public RegexValidatedParameter(char code, string description, bool required = false, Func<bool> conditionalRequirement = null)
+            : base(code, description, required, true, conditionalRequirement) { }
 
         protected override bool ValidateValue(string value)
         {
